@@ -66,6 +66,12 @@ class MenuItemSeeder extends Seeder
                     'permission_name' => 'menu-item.index',
                     'menu_group_id' => 4,
                 ],
+                [
+                    'name' => 'Invoice',
+                    'route' => 'invoice',
+                    'permission_name' => 'invoice.index',
+                    'menu_group_id' => 5,
+                ],
             ]
         );
     }
