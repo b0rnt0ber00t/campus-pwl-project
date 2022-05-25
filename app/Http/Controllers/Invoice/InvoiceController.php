@@ -23,9 +23,13 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $invoices = Invoice::orderBy('id', 'desc')->paginate(10);
+        $invoices = Invoice::when(!blank($request->code), function ($queery) use ($request) {
+            return $queery->where('code', 'like', '%' . $request->code . '%');
+        })
+            ->orderBy('id', 'desc')
+            ->paginate(10);
         return view('invoice.index', compact('invoices'));
     }
 

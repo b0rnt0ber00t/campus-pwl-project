@@ -35,7 +35,7 @@
                 Export User</a>
               <a class="btn btn-info btn-primary active search">
                 <i class="fa fa-search" aria-hidden="true"></i>
-                Search User</a>
+                Search Invoice</a>
             </div>
             <form action="{{ route('invoice.store') }}" method="post" id="form-create-invoice">
               @csrf
@@ -56,16 +56,16 @@
               </div>
             </div>
             <div class="show-search mb-3" style="display: none">
-              <form id="search" method="GET" action="{{ route('user.index') }}">
+              <form id="search" method="GET" action="{{ route('invoice.index') }}">
                 <div class="form-row">
                   <div class="form-group col-md-4">
-                    <label for="role">User</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="User Name">
+                    <label for="code">Invoice</label>
+                    <input type="text" name="code" class="form-control" id="code" placeholder="Code">
                   </div>
                 </div>
                 <div class="text-right">
                   <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                  <a class="btn btn-secondary" href="{{ route('user.index') }}">Reset</a>
+                  <a class="btn btn-secondary" href="{{ route('invoice.index') }}">Reset</a>
                 </div>
               </form>
             </div>
