@@ -89,13 +89,17 @@
                     <td>{{ $invoice->payment_type }}</td>
                     <td class="text-right">
                       <div class="d-flex justify-content-end">
+                        <a href="#" class="btn btn-primary btn-sm btn-icon mr-2">
+                          <i class="fas fa-dollar-sign"></i>
+                          Pay
+                        </a>
                         <a href="{{ route('user.edit', $invoice->id) }}" class="btn btn-sm btn-info btn-icon ">
                           <i class="fas fa-edit"></i>
                           Edit
                         </a>
-                        <form action="{{ route('user.destroy', $invoice->id) }}" method="POST" class="ml-2">
-                          <input type="hidden" name="_method" value="DELETE">
-                          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <form action="{{ route('invoice.destroy', $invoice->id) }}" method="POST" class="ml-2">
+                          @csrf
+                          @method('DELETE')
                           <button class="btn btn-sm btn-danger btn-icon "><i class="fas fa-times"></i> Delete </button>
                         </form>
                       </div>

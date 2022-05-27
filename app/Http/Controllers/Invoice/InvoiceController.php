@@ -25,11 +25,13 @@ class InvoiceController extends Controller
      */
     public function index(Request $request)
     {
-        $invoices = Invoice::when(!blank($request->code), function ($queery) use ($request) {
-            return $queery->where('code', 'like', '%' . $request->code . '%');
-        })
+        $invoices = Invoice::query()
+            ->when(!blank($request->code), function ($queery) use ($request) {
+                return $queery->where('code', 'like', '%' . $request->code . '%');
+            })
             ->orderBy('id', 'desc')
             ->paginate(10);
+
         return view('invoice.index', compact('invoices'));
     }
 
@@ -46,16 +48,15 @@ class InvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         Invoice::create([
             'code'  => str()->uuid()->toString(),
             'start' => microtime(true)
         ]);
-        return redirect(route('invoice.index'))->with('success', 'Data Berhasil Ditambahkan');
+        return redirect()->route('invoice.index')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -98,8 +99,9 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Invoice $invoice)
     {
-        //
+        $invoice->delete();
+        return redirect()->route('invoice.index')->with('success', $invoice->code . ' Berhasil Dihapus');
     }
 }
