@@ -12,10 +12,10 @@ class OptionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:invoice.index')->only('index');
-        $this->middleware('permission:invoice.create')->only('create', 'store');
-        $this->middleware('permission:invoice.edit')->only('edit', 'update');
-        $this->middleware('permission:invoice.destroy')->only('destroy');
+        $this->middleware('permission:option.index')->only('index');
+        $this->middleware('permission:option.create')->only('create', 'store');
+        $this->middleware('permission:option.edit')->only('edit', 'update');
+        $this->middleware('permission:option.destroy')->only('destroy');
     }
 
     /**
