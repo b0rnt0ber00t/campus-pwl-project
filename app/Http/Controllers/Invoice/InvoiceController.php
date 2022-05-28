@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Invoice;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\Option;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -31,7 +32,7 @@ class InvoiceController extends Controller
             })
             ->orderBy('id', 'desc')
             ->paginate(10);
-
+        dd($invoices, Option::all());
         return view('invoice.index', compact('invoices'));
     }
 

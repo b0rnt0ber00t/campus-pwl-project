@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Database\Seeders\Invoice\InvoiceSeeder;
+use Database\Seeders\Option\OptionSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
             MenuItemSeeder::class,
             CategorySeeder::class,
             InvoiceSeeder::class,
+            OptionSeeder::class,
         ]);
     }
 }
