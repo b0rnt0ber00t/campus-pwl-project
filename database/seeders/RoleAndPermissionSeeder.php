@@ -79,6 +79,13 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'invoice.edit']);
         Permission::create(['name' => 'invoice.destroy']);
 
+        // Option
+        Permission::create(['name' => 'option']);
+        Permission::create(['name' => 'option.index']);
+        Permission::create(['name' => 'option.create']);
+        Permission::create(['name' => 'option.edit']);
+        Permission::create(['name' => 'option.destroy']);
+
         // create roles 
         $roleUser = Role::create(['name' => 'user']);
         $roleUser->givePermissionTo([

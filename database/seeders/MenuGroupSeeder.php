@@ -42,6 +42,11 @@ class MenuGroupSeeder extends Seeder
                     'name' => 'Invoice',
                     'icon' => 'fas fa-file-invoice-dollar',
                     'permisison_name' => 'invoice',
+                ],
+                [
+                    'name' => 'Option',
+                    'icon' => 'fas fa-cog',
+                    'permisison_name' => 'option',
                 ]
             ]
         );
