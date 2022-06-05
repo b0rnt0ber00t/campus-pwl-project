@@ -47,6 +47,11 @@ class MenuGroupSeeder extends Seeder
                     'name' => 'Option',
                     'icon' => 'fas fa-cog',
                     'permisison_name' => 'option',
+                ],
+                [
+                    'name' => 'Parking',
+                    'icon' => 'fas fa-parking',
+                    'permisison_name' => 'parking',
                 ]
             ]
         );

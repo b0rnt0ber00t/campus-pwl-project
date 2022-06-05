@@ -26,4 +26,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Option
     Route::resource('option', OptionController::class)->only('index', 'store', 'update', 'destroy');
+
+    // Parking
+    Route::view('parking', 'parking.index')->name('parking.index');
 });

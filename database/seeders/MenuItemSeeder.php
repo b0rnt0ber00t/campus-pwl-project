@@ -78,6 +78,12 @@ class MenuItemSeeder extends Seeder
                     'permission_name' => 'option.index',
                     'menu_group_id' => 6,
                 ],
+                [
+                    'name' => 'Parking',
+                    'route' => 'parking',
+                    'permission_name' => 'parking.index',
+                    'menu_group_id' => 7,
+                ],
             ]
         );
     }
