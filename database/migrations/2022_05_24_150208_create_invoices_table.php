@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->uuid('code');
+            $table->bigInteger('start');
+            $table->bigInteger('finish')->nullable();
+            $table->string('payment_type')->nullable();
             $table->timestamps();
         });
     }
