@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Invoice\InvoiceController;
 use App\Http\Controllers\Option\OptionController;
+use App\Http\Controllers\Parking\ParkingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,5 +29,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('option', OptionController::class)->only('index', 'store', 'update', 'destroy');
 
     // Parking
-    Route::view('parking', 'parking.index')->name('parking.index');
+    Route::resource('parking', ParkingController::class)->only('index');
 });
