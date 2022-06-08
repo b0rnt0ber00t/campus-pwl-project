@@ -40,6 +40,7 @@ class ParkingController extends Controller
     public function store(ParkingRequest $request)
     {
         Parking::create($request->validated());
+
         return to_route('parking.index')->with('success', 'Data Berhasil Ditambahkan');
     }
 

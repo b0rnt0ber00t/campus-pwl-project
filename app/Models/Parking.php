@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Parking extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['number', 'is_available'];
+
+    protected $casts = [
+        'is_available' => 'boolean'
+    ];
 }
