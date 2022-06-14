@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Invoice\InvoiceController;
 use App\Http\Controllers\Option\OptionController;
 use App\Http\Controllers\Parking\ParkingController;
@@ -20,7 +21,7 @@ Route::redirect('/', '/login');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     // Dashbaord
-    Route::get('dashboard', fn () => view('home'))->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Invoice
     Route::resource('invoice', InvoiceController::class)->only('index', 'store', 'update', 'destroy');
