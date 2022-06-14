@@ -87,7 +87,7 @@ class MenuItemSeeder extends Seeder
                 [
                     'name' => 'Parking Category',
                     'route' => 'parking/category',
-                    'permission_name' => 'parking-category.index',
+                    'permission_name' => 'parking.category.index',
                     'menu_group_id' => 7,
                 ],
             ]
