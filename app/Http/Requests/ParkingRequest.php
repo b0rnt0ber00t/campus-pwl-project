@@ -13,7 +13,7 @@ class ParkingRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class ParkingRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'number' => ['required', 'numeric'],
+            'is_available' => ['required', 'boolean'],
         ];
     }
 }

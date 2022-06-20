@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('parkings', function (Blueprint $table) {
             $table->id();
+            $table->integer('number');
+            $table->boolean('is_available');
             $table->timestamps();
         });
     }

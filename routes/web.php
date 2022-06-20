@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Invoice\InvoiceController;
 use App\Http\Controllers\Option\OptionController;
+use App\Http\Controllers\Parking\ParkingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +21,7 @@ Route::redirect('/', '/login');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     // Dashbaord
-    Route::get('dashboard', fn () => view('home'))->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Invoice
     Route::resource('invoice', InvoiceController::class)->only('index', 'store', 'update', 'destroy');
@@ -28,5 +30,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('option', OptionController::class)->only('index', 'store', 'update', 'destroy');
 
     // Parking
-    Route::view('parking', 'parking.index')->name('parking.index');
+    Route::resource('parking', ParkingController::class)->only('index', 'store', 'update', 'destroy');
+    Route::prefix('parking')->name('parking.')->group(function () {
+        Route::resource('category', ParkingController::class)->only('index', 'store', 'update', 'destroy');
+    });
 });
