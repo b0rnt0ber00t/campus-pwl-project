@@ -33,7 +33,7 @@ class ParkingController extends Controller
      */
     public function create()
     {
-        // return view('parking.create');
+        return view('parking.create');
     }
 
     /**

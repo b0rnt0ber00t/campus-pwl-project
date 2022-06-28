@@ -17,7 +17,7 @@
       <a href="#" class="btn btn-sm rounded btn-danger ml-2">Delete</a>
     </div>
     <div class="card-body">
-      <a href="#" class="btn btn-primary mb-3">
+      <a href="{{ route('floor.parking.create', $parking_floor->id) }}" class="btn btn-primary mb-3">
         <i class="fas fa-plus mr-1"></i>
         Add Park
       </a>
@@ -31,7 +31,10 @@
               <span class="ml-3 badge bg-success text-white">Available</span>
             </div>
             <div class="card-body">
-              <a class="btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice').submit()">
+              <a href="{{ route('floor.parking.edit', [$parking_floor->id, $parking->id]) }}" class="btn btn-warning">Edit</a>
+              <a href="#" class="btn btn-danger">Delete</a>
+              <br>
+              <a class="mt-3 btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice').submit()">
                 New Invoice</a>
               <form action="{{ route('parking.invoice.store', $parking->id) }}" method="post" id="form-create-invoice">
                 @csrf
@@ -47,7 +50,10 @@
               <span class="ml-3 badge bg-danger text-white">Not Available</span>
             </div>
             <div class="card-body">
-              <a class="btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice').submit()">
+              <a href="{{ route('floor.parking.edit', [$parking_floor->id, $parking->id]) }}" class="btn btn-warning">Edit</a>
+              <a href="#" class="btn btn-danger">Delete</a>
+              <br>
+              <a class="mt-3 btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice').submit()">
                 Pay</a>
               <form action="{{ route('parking.invoice.store', $parking->id) }}" method="post" id="form-create-invoice">
                 @csrf

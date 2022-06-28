@@ -32,7 +32,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('option', OptionController::class)->only('index', 'store', 'update', 'destroy');
 
     // Parking
-    Route::resource('parking', ParkingController::class)->only('index', 'store', 'update', 'destroy');
+    Route::resource('parking', ParkingController::class)->only('index');
+    Route::prefix('parking')->group(function () {
+        Route::resource('floor.parking', ParkingController::class)->only('create', 'store', 'edit', 'update', 'destroy');
+    });
     Route::prefix('parking')->name('parking-')->group(function () {
         Route::resource('floor', ParkingFloorController::class)->only('index', 'create', 'store', 'update', 'destroy');
     });
