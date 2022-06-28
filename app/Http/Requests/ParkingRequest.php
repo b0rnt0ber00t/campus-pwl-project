@@ -25,8 +25,8 @@ class ParkingRequest extends FormRequest
     {
         return [
             'number' => ['required', 'numeric'],
-            'is_available' => ['required', 'boolean'],
-            'parking_floor_id' => ['required', 'numeric'],
+            // 'is_available' => ['nullable', 'boolean'],
+            // 'parking_floor_id' => ['nullable', 'numeric'],
         ];
     }
 }

@@ -5,6 +5,8 @@
     <h1>Parking</h1>
   </div>
 
+  @include('layouts.alert')
+
   <a href="{{ route('parking-floor.create') }}" class="btn btn-primary mb-3">
     <i class="fas fa-plus mr-1"></i>
     Add Floor
@@ -32,10 +34,16 @@
             </div>
             <div class="card-body">
               <a href="{{ route('floor.parking.edit', [$parking_floor->id, $parking->id]) }}" class="btn btn-warning">Edit</a>
-              <a href="#" class="btn btn-danger">Delete</a>
+              <a href="#" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('form-delete-{{ $parking->id }}').submit()">
+                Delete</a>
               <br>
               <a class="mt-3 btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice').submit()">
                 New Invoice</a>
+
+              <form action="{{ route('floor.parking.destroy', [$parking_floor->id, $parking->id]) }}" method="post" id="form-delete-{{ $parking->id }}">
+                @csrf
+                @method('DELETE')
+              </form>
               <form action="{{ route('parking.invoice.store', $parking->id) }}" method="post" id="form-create-invoice">
                 @csrf
               </form>
@@ -51,10 +59,16 @@
             </div>
             <div class="card-body">
               <a href="{{ route('floor.parking.edit', [$parking_floor->id, $parking->id]) }}" class="btn btn-warning">Edit</a>
-              <a href="#" class="btn btn-danger">Delete</a>
+              <a href="#" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('form-delete-{{ $parking->id }}').submit()">
+                Delete</a>
               <br>
               <a class="mt-3 btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice').submit()">
                 Pay</a>
+
+              <form action="{{ route('floor.parking.destroy', [$parking_floor->id, $parking->id]) }}" method="post" id="form-delete-{{ $parking->id }}">
+                @csrf
+                @method('DELETE')
+              </form>
               <form action="{{ route('parking.invoice.store', $parking->id) }}" method="post" id="form-create-invoice">
                 @csrf
               </form>

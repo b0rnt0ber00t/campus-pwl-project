@@ -21,7 +21,9 @@ class ParkingController extends Controller
             'parking.invoice' => function ($query) {
                 return $query->orderBy('id', 'desc');
             }
-        ])->get();
+        ])
+            ->orderBy('floor', 'asc')
+            ->get();
 
         return view('parking.index', compact('parking_floors'));
     }
@@ -31,9 +33,9 @@ class ParkingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(ParkingFloor $floor)
     {
-        return view('parking.create');
+        return view('parking.create', compact('floor'));
     }
 
     /**
@@ -42,9 +44,12 @@ class ParkingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ParkingRequest $request)
+    public function store(ParkingRequest $request, ParkingFloor $floor)
     {
-        Parking::create($request->validated());
+        Parking::create(array_merge($request->validated(), [
+            'is_available' => true,
+            'parking_floor_id' => $floor->id
+        ]));
 
         return to_route('parking.index')->with('success', 'Data Berhasil Ditambahkan');
     }
@@ -66,9 +71,9 @@ class ParkingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Parking $parking)
+    public function edit(ParkingFloor $floor, Parking $parking)
     {
-        // return view('parking.edit');
+        return view('parking.edit', compact('floor', 'parking'));
     }
 
     /**
@@ -78,7 +83,7 @@ class ParkingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ParkingRequest $request, Parking $parking)
+    public function update(ParkingRequest $request, ParkingFloor $floor, Parking $parking)
     {
         $parking->update($request->validated());
 
@@ -91,7 +96,7 @@ class ParkingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Parking $parking)
+    public function destroy(ParkingFloor $floor, Parking $parking)
     {
         $parking->delete();
 
