@@ -24,7 +24,7 @@ class ParkingFloorController extends Controller
      */
     public function create()
     {
-        //
+        return view('parking-floor.create');
     }
 
     /**

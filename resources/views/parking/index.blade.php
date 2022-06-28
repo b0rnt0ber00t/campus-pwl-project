@@ -5,7 +5,7 @@
     <h1>Parking</h1>
   </div>
 
-  <a href="#" class="btn btn-primary mb-3">
+  <a href="{{ route('parking-floor.create') }}" class="btn btn-primary mb-3">
     <i class="fas fa-plus mr-1"></i>
     Add Floor
   </a>
