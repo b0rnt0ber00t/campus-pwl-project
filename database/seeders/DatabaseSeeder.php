@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
             MenuGroupSeeder::class,
             MenuItemSeeder::class,
             CategorySeeder::class,
-            InvoiceSeeder::class,
+            // InvoiceSeeder::class,
             OptionSeeder::class,
-            ParkingSeeder::class,
+            // ParkingSeeder::class,
         ]);
     }
 }
