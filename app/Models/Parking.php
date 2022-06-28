@@ -14,4 +14,9 @@ class Parking extends Model
     protected $casts = [
         'is_available' => 'boolean'
     ];
+
+    public function parking_floor()
+    {
+        return $this->belongsTo(ParkingFloor::class);
+    }
 }

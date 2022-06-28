@@ -16,7 +16,7 @@ class ParkingController extends Controller
      */
     public function index()
     {
-        $parkings = Parking::all();
+        $parkings = Parking::with('parking_floor')->get();
 
         return view('parking.index', compact('parkings'));
     }
