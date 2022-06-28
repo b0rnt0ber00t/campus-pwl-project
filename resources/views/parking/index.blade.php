@@ -5,23 +5,61 @@
     <h1>Parking</h1>
   </div>
 
+  <a href="#" class="btn btn-primary mb-3">
+    <i class="fas fa-plus mr-1"></i>
+    Add Floor
+  </a>
+
+  @foreach ($parking_floors as $parking_floor)
   <div class="card">
+    <div class="card-header">
+      <span>Floor {{ $parking_floor->floor }}</span>
+    </div>
     <div class="card-body">
-      <div class="card-title">Floor #parking_floor.floor</div>
+      <a href="#" class="btn btn-primary mb-3">
+        <i class="fas fa-plus mr-1"></i>
+        Add Park
+      </a>
       <div class="row">
+        @foreach ($parking_floor->parking as $parking)
+        @if ($parking->is_available)
         <div class="col-lg-2">
-          <div class="card bg-primary">
-            <div class="card-header">Parking #parking_floor.parking.number</div>
+          <div class="card shadow">
+            <div class="card-header">
+              Parking {{ $parking->number }}
+              <span class="ml-3 badge bg-success text-white">Available</span>
+            </div>
+            <div class="card-body">
+              <a class="btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice').submit()">
+                New Invoice</a>
+              <form action="{{ route('parking.invoice.store', $parking->id) }}" method="post" id="form-create-invoice">
+                @csrf
+              </form>
+            </div>
           </div>
         </div>
+        @else
         <div class="col-lg-2">
-          <div class="card bg-danger">
-            <div class="card-header">Parking #parking_floor.parking.number</div>
+          <div class="card shadow">
+            <div class="card-header">
+              Parking {{ $parking->number }}
+              <span class="ml-3 badge bg-danger text-white">Not Available</span>
+            </div>
+            <div class="card-body">
+              <a class="btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice').submit()">
+                Pay</a>
+              <form action="{{ route('parking.invoice.store', $parking->id) }}" method="post" id="form-create-invoice">
+                @csrf
+              </form>
+            </div>
           </div>
         </div>
+        @endif
+        @endforeach
       </div>
     </div>
   </div>
+  @endforeach
 
   </div>
 </section>
