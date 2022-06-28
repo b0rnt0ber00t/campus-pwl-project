@@ -14,6 +14,11 @@
             <div class="card-header">Parking #parking_floor.parking.number</div>
           </div>
         </div>
+        <div class="col-lg-2">
+          <div class="card bg-danger">
+            <div class="card-header">Parking #parking_floor.parking.number</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
