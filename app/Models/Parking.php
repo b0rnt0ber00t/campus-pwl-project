@@ -9,7 +9,7 @@ class Parking extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['number', 'is_available'];
+    protected $fillable = ['number', 'is_available', 'parking_floor_id'];
 
     protected $casts = [
         'is_available' => 'boolean'

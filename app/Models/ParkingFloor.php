@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ParkingFloor extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['floor'];
 }
