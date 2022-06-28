@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             InvoiceSeeder::class,
             OptionSeeder::class,
+            ParkingSeeder::class,
         ]);
     }
 }

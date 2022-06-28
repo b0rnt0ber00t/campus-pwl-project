@@ -28,7 +28,7 @@ class ParkingController extends Controller
      */
     public function create()
     {
-        //
+        // return view('parking.create');
     }
 
     /**
@@ -61,9 +61,9 @@ class ParkingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Parking $parking)
     {
-        //
+        // return view('parking.edit');
     }
 
     /**
