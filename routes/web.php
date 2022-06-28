@@ -29,10 +29,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('parking.invoice', InvoiceController::class)->only('store');
 
     // Option
-    Route::resource('option', OptionController::class)->only('index', 'store', 'update', 'destroy');
+    Route::resource('option', OptionController::class)->only('index', 'update');
 
     // Parking
     Route::resource('parking', ParkingController::class)->only('index');
+    Route::get('parking/{parking}', [ParkingController::class, 'parking'])->name('parking.parking');
     Route::prefix('parking')->group(function () {
         Route::resource('floor.parking', ParkingController::class)->only('create', 'store', 'edit', 'update', 'destroy');
     });

@@ -25,14 +25,10 @@ class OptionController extends Controller
      */
     public function index(Request $request)
     {
-        $options = Option::query()
-            ->when(!blank($request->name), function ($queery) use ($request) {
-                return $queery->where('name', 'like', '%' . $request->name . '%');
-            })
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        $price = Option::where('name', 'price')->first();
+        $timer_count = Option::where('name', 'timer_count')->first();
 
-        return view('option.index', compact('options'));
+        return view('option.index', compact('timer_count', 'price'));
     }
 
     /**
@@ -88,6 +84,7 @@ class OptionController extends Controller
      */
     public function update(StoreOptionRequest $request, Option $option)
     {
+        // dd($request->validated());
         $option->update($request->validated());
         return back()->with('success', $option->name . ' Data Berhasil Diperbarui');
     }

@@ -42,14 +42,14 @@
               <a href="#" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('form-delete-{{ $parking->id }}').submit()">
                 Delete</a>
               <br>
-              <a class="mt-3 btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice').submit()">
+              <a class="mt-3 btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice-{{ $parking->id }}').submit()">
                 New Invoice</a>
 
               <form action="{{ route('floor.parking.destroy', [$parking_floor->id, $parking->id]) }}" method="post" id="form-delete-{{ $parking->id }}">
                 @csrf
                 @method('DELETE')
               </form>
-              <form action="{{ route('parking.invoice.store', $parking->id) }}" method="post" id="form-create-invoice">
+              <form action="{{ route('parking.invoice.store', $parking->id) }}" method="post" id="form-create-invoice-{{ $parking->id }}">
                 @csrf
               </form>
             </div>
@@ -67,15 +67,12 @@
               <a href="#" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('form-delete-{{ $parking->id }}').submit()">
                 Delete</a>
               <br>
-              <a class="mt-3 btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice').submit()">
+              <a class="mt-3 btn btn-icon icon-left btn-primary" href="{{ route('invoice.index', ['code' => $parking->invoice[0]->code]) }}">
                 Pay</a>
 
               <form action="{{ route('floor.parking.destroy', [$parking_floor->id, $parking->id]) }}" method="post" id="form-delete-{{ $parking->id }}">
                 @csrf
                 @method('DELETE')
-              </form>
-              <form action="{{ route('parking.invoice.store', $parking->id) }}" method="post" id="form-create-invoice">
-                @csrf
               </form>
             </div>
           </div>

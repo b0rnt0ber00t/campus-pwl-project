@@ -25,6 +25,8 @@ class ParkingController extends Controller
             ->orderBy('floor', 'asc')
             ->get();
 
+        // dd($parking_floors);
+
         return view('parking.index', compact('parking_floors'));
     }
 
@@ -88,6 +90,13 @@ class ParkingController extends Controller
         $parking->update($request->validated());
 
         return to_route('parking.index')->with('success', 'Data Berhasil Diupdate');
+    }
+
+    public function parking(Parking $parking)
+    {
+        $parking->update(['is_available' => true]);
+
+        return response()->json(['status' => 200]);
     }
 
     /**

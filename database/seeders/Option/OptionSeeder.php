@@ -18,7 +18,12 @@ class OptionSeeder extends Seeder
     {
         Option::create([
             'name' => 'timer_count',
-            'value' => 'hour'
+            'value' => 'second'
+        ]);
+
+        Option::create([
+            'name' => 'price',
+            'value' => 20000
         ]);
     }
 }

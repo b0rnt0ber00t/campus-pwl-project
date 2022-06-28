@@ -4,147 +4,73 @@
 <!-- Main Content -->
 <section class="section">
   <div class="section-header">
-    <h1>Invoice List</h1>
-    <div class="section-header-breadcrumb">
-      <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-      <div class="breadcrumb-item"><a href="#">Components</a></div>
-      <div class="breadcrumb-item">Table</div>
-    </div>
+    <h1>Pay Invoice</h1>
   </div>
   <div class="section-body">
-    <h2 class="section-title">Invoice Management</h2>
+    <div class="card">
+      <div class="card-body h5">
+        <table>
+          <tr>
+            <td>code</td>
+            <td>:</td>
+            <td>{{ $invoice->code }}</td>
+          </tr>
+          <tr>
+            <td>start</td>
+            <td>:</td>
+            <td>{{ date("Y-m-d H:i:s", $invoice->start) }}</td>
+          </tr>
+          <tr>
+            <td>finish</td>
+            <td>:</td>
+            <td>{{ date("Y-m-d H:i:s") }}</td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td>:</td>
+            <td>Rp. {{ number_format($total, 0, '', ',') }}</td>
+          </tr>
+        </table>
 
-    <div class="row">
-      <div class="col-12">
-        @include('layouts.alert')
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="card card-primary">
-          <div class="card-header">
-            <h4>Invoice List</h4>
-            <div class="card-header-action">
-              <a class="btn btn-icon icon-left btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('form-create-invoice').submit()">
-                Create New Invoice</a>
-              <a class="btn btn-info btn-primary active import">
-                <i class="fa fa-download" aria-hidden="true"></i>
-                Import User</a>
-              <a class="btn btn-info btn-primary active" href="{{ route('user.export') }}">
-                <i class="fa fa-upload" aria-hidden="true"></i>
-                Export User</a>
-              <a class="btn btn-info btn-primary active search">
-                <i class="fa fa-search" aria-hidden="true"></i>
-                Search Invoice</a>
-            </div>
-            <form action="{{ route('invoice.store') }}" method="post" id="form-create-invoice">
-              @csrf
-            </form>
-          </div>
-          <div class="card-body">
-            <div class="show-import" style="display: none">
-              <div class="custom-file">
-                <form action="{{ route('user.import') }}" method="post" enctype="multipart/form-data">
-                  {{ csrf_field() }}
-                  <label class="custom-file-label" for="file-upload">Choose File</label>
-                  <input type="file" id="file-upload" class="custom-file-input" name="import_file">
-                  <br /> <br />
-                  <div class="footer text-right">
-                    <button class="btn btn-primary">Import File</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="show-search mb-3" style="display: none">
-              <form id="search" method="GET" action="{{ route('invoice.index') }}">
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                    <label for="code">Invoice</label>
-                    <input type="text" name="code" class="form-control" id="code" placeholder="Code">
-                  </div>
-                </div>
-                <div class="text-right">
-                  <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                  <a class="btn btn-secondary" href="{{ route('invoice.index') }}">Reset</a>
-                </div>
-              </form>
-            </div>
-            <div class="table-responsive">
-              <table class="table table-bordered table-md">
-                <tbody>
-                  <tr>
-                    <th>#</th>
-                    <th>Code</th>
-                    <th>Start</th>
-                    <th>Finish</th>
-                    <th>Payment</th>
-                    <th class="text-right">Action</th>
-                  </tr>
-                  @foreach ($invoices as $key => $invoice)
-                  <tr>
-                    <td>{{ ($invoices->currentPage() - 1) * $invoices->perPage() + $key + 1 }}</td>
-                    <td>{{ $invoice->code }}</td>
-                    <td>{{ $invoice->start}}</td>
-                    <td>{{ $invoice->finish}}</td>
-                    <td>{{ $invoice->payment_type }}</td>
-                    <td class="text-right">
-                      <div class="d-flex justify-content-end">
-                        <a href="#" class="btn btn-primary btn-sm btn-icon mr-2">
-                          <i class="fas fa-dollar-sign"></i>
-                          Pay
-                        </a>
-                        <a href="{{ route('user.edit', $invoice->id) }}" class="btn btn-sm btn-info btn-icon ">
-                          <i class="fas fa-edit"></i>
-                          Edit
-                        </a>
-                        <form action="{{ route('invoice.destroy', $invoice->id) }}" method="POST" class="ml-2">
-                          @csrf
-                          @method('DELETE')
-                          <button class="btn btn-sm btn-danger btn-icon "><i class="fas fa-times"></i> Delete </button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-              <div class="d-flex justify-content-center">
-                {{ $invoices->withQueryString()->links() }}
-              </div>
-            </div>
-          </div>
-
-
-
-
-        </div>
+        <button type="button" id="pay-button" class="btn btn-primary mt-3">Pay!</button>
       </div>
     </div>
   </div>
 </section>
 @endsection
 @push('customScript')
-<script>
-  $(document).ready(function() {
-    $('.import').click(function(event) {
-      event.stopPropagation();
-      $(".show-import").slideToggle("fast");
-      $(".show-search").hide();
+<script type="text/javascript">
+  $(document).ready(() => {
+    // For example trigger on button clicked, or any time you need
+    var payButton = document.getElementById('pay-button');
+    payButton.addEventListener('click', function() {
+      // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+      window.snap.pay("{{ $token }}", {
+        onSuccess: function(result) {
+          /* You may add your own implementation here */
+          // alert("payment success!");
+          fetch("{{ route('parking.parking', $invoice->parking->id) }}")
+        },
+        onPending: function(result) {
+          /* You may add your own implementation here */
+          // alert("wating your payment!");
+          fetch("{{ route('parking.parking', $invoice->parking->id) }}")
+        },
+        onError: function(result) {
+          /* You may add your own implementation here */
+          // alert("payment failed!");
+          fetch("{{ route('parking.parking', $invoice->parking->id) }}")
+        },
+        onClose: function() {
+          /* You may add your own implementation here */
+          alert('you closed the popup without finishing the payment');
+        }
+      })
     });
-    $('.search').click(function(event) {
-      event.stopPropagation();
-      $(".show-search").slideToggle("fast");
-      $(".show-import").hide();
-    });
-    //ganti label berdasarkan nama file
-    $('#file-upload').change(function() {
-      var i = $(this).prev('label').clone();
-      var file = $('#file-upload')[0].files[0].name;
-      $(this).prev('label').text(file);
-    });
-  });
+  })
 </script>
 @endpush
 
 @push('customStyle')
+<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
 @endpush
