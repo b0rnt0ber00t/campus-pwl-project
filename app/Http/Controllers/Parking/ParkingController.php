@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Parking;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ParkingRequest;
 use App\Models\Parking;
+use App\Models\ParkingFloor;
 use Illuminate\Http\Request;
 
 class ParkingController extends Controller
@@ -16,9 +17,9 @@ class ParkingController extends Controller
      */
     public function index()
     {
-        $parkings = Parking::with('parking_floor')->get();
+        $parking_floors = ParkingFloor::with('parking')->get();
 
-        return view('parking.index', compact('parkings'));
+        return view('parking.index', compact('parking_floors'));
     }
 
     /**

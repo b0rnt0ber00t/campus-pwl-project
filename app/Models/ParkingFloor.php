@@ -10,4 +10,9 @@ class ParkingFloor extends Model
     use HasFactory;
 
     protected $fillable = ['floor'];
+
+    public function parking()
+    {
+        return $this->hasMany(Parking::class);
+    }
 }
