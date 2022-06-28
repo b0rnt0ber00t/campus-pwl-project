@@ -14,6 +14,7 @@
   <div class="card">
     <div class="card-header">
       <span>Floor {{ $parking_floor->floor }}</span>
+      <a href="#" class="btn btn-sm rounded btn-danger ml-2">Delete</a>
     </div>
     <div class="card-body">
       <a href="#" class="btn btn-primary mb-3">
