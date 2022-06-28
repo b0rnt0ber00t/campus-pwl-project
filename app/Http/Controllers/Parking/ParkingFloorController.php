@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Parking;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
+use App\Models\Parking;
+use App\Models\ParkingFloor;
 use Illuminate\Http\Request;
 
 class ParkingFloorController extends Controller
@@ -78,8 +81,12 @@ class ParkingFloorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ParkingFloor $floor)
     {
-        //
+        Invoice::whereIn('parking_id', Parking::where('parking_floor_id', $floor->id)->pluck('id'))->delete();
+        Parking::where('parking_floor_id', $floor->id)->delete();
+        $floor->delete();
+
+        return to_route('parking.index')->with('success', 'Data Berhasil Dihapus');
     }
 }

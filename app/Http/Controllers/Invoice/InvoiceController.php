@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Invoice;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invoice\UpdateInvoiceRequest;
 use App\Models\Invoice;
+use App\Models\Parking;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -51,12 +52,15 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Parking $parking)
     {
         Invoice::create([
             'code'  => str()->uuid()->toString(),
-            'start' => microtime(true)
+            'start' => microtime(true),
+            'parking_id' => $parking->id
         ]);
+        $parking->update(['is_available' => false]);
+
         return back()->with('success', 'Data Berhasil Ditambahkan');
     }
 

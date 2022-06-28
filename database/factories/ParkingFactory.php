@@ -18,7 +18,7 @@ class ParkingFactory extends Factory
     {
         return [
             'number' => rand(100, 1000),
-            'is_available' => rand(0, 1),
+            'is_available' => true,
             'parking_floor_id' => rand(1, 5)
         ];
     }
