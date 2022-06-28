@@ -17,7 +17,11 @@ class ParkingController extends Controller
      */
     public function index()
     {
-        $parking_floors = ParkingFloor::with('parking')->get();
+        $parking_floors = ParkingFloor::with([
+            'parking.invoice' => function ($query) {
+                return $query->orderBy('id', 'desc');
+            }
+        ])->get();
 
         return view('parking.index', compact('parking_floors'));
     }

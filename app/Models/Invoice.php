@@ -13,6 +13,12 @@ class Invoice extends Model
         'start',
         'finish',
         'code',
-        'payment_type'
+        'payment_type',
+        'parking_id'
     ];
+
+    public function parking()
+    {
+        return $this->belongsTo(Parking::class);
+    }
 }

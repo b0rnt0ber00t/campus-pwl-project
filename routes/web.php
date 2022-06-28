@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Invoice\InvoiceController;
 use App\Http\Controllers\Option\OptionController;
 use App\Http\Controllers\Parking\ParkingController;
+use App\Http\Controllers\Parking\ParkingFloorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Invoice
-    Route::resource('invoice', InvoiceController::class)->only('index', 'store', 'update', 'destroy');
+    Route::resource('invoice', InvoiceController::class)->only('index', 'update', 'destroy');
+    Route::resource('parking.invoice', InvoiceController::class)->only('store');
 
     // Option
     Route::resource('option', OptionController::class)->only('index', 'store', 'update', 'destroy');

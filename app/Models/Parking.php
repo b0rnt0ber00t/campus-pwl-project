@@ -19,4 +19,9 @@ class Parking extends Model
     {
         return $this->belongsTo(ParkingFloor::class);
     }
+
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

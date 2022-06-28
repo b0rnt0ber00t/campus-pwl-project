@@ -24,6 +24,7 @@ class InvoiceFactory extends Factory
             'start' => microtime(true),
             'finish' => microtime(true) + rand(10000, 1000000),
             'payment_type' => 'cash',
+            'parking_id' => rand(1, 10),
         ];
     }
 }
