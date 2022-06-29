@@ -16,55 +16,55 @@ class ParkingTest extends TestCase
      *
      * @return void
      */
-    public function test_parking_route_get()
-    {
-        $user = User::find(1);
+    // public function test_parking_route_get()
+    // {
+    //     $user = User::find(1);
 
-        $response = $this->actingAs($user)->get(route('parking.index'));
+    //     $response = $this->actingAs($user)->get(route('parking.index'));
 
-        $response->assertStatus(200);
-    }
+    //     $response->assertStatus(200);
+    // }
 
-    public function test_parking_create()
-    {
-        $user = User::find(1);
+    // public function test_parking_create()
+    // {
+    //     $user = User::find(1);
 
-        $response = $this->actingAs($user)->post(route('parking.store'), [
-            'number' => 99,
-            'is_available' => true
-        ]);
+    //     $response = $this->actingAs($user)->post(route('parking.store'), [
+    //         'number' => 99,
+    //         'is_available' => true
+    //     ]);
 
-        $response->assertRedirect(route('parking.index'));
-    }
+    //     $response->assertRedirect(route('parking.index'));
+    // }
 
-    public function test_parking_update()
-    {
-        $user = User::find(1);
-        $park = Parking::create([
-            'number' => 99,
-            'is_available' => true
-        ]);
+    // public function test_parking_update()
+    // {
+    //     $user = User::find(1);
+    //     $park = Parking::create([
+    //         'number' => 99,
+    //         'is_available' => true
+    //     ]);
 
-        $this->actingAs($user)->put(route('parking.update', $park->id), [
-            'number' => 99,
-            'is_available' => false
-        ]);
+    //     $this->actingAs($user)->put(route('parking.update', $park->id), [
+    //         'number' => 99,
+    //         'is_available' => false
+    //     ]);
 
-        $park = Parking::find($park->id);
+    //     $park = Parking::find($park->id);
 
-        $this->assertFalse($park->is_available);
-    }
+    //     $this->assertFalse($park->is_available);
+    // }
 
-    public function test_parking_delete()
-    {
-        $user = User::find(1);
-        $park = Parking::create([
-            'number' => 99,
-            'is_available' => true
-        ]);
+    // public function test_parking_delete()
+    // {
+    //     $user = User::find(1);
+    //     $park = Parking::create([
+    //         'number' => 99,
+    //         'is_available' => true
+    //     ]);
 
-        $response = $this->actingAs($user)->delete(route('parking.destroy', $park->id));
+    //     $response = $this->actingAs($user)->delete(route('parking.destroy', $park->id));
 
-        $response->assertRedirect(route('parking.index'));
-    }
+    //     $response->assertRedirect(route('parking.index'));
+    // }
 }
