@@ -16,6 +16,7 @@
   <div class="card">
     <div class="card-header">
       <span>Floor {{ $parking_floor->floor }}</span>
+      <a href="{{ route('parking-floor.edit', $parking_floor->id) }}" class="btn btn-sm rounded btn-warning ml-2">Edit</a>
       <a href="#" class="btn btn-sm rounded btn-danger ml-2" onclick="event.preventDefault(); document.getElementById('form-delete-floor-{{ $parking_floor->id }}').submit()">
         Delete</a>
       <form action="{{ route('parking-floor.destroy', $parking_floor->id) }}" method="post" id="form-delete-floor-{{ $parking_floor->id }}">

@@ -35,7 +35,6 @@ class InvoiceController extends Controller
         $price = Option::firstWhere('name', 'price')->value;
         $total = $invoice->{$time_count}($price);
 
-        // dd($total);
         $params = array(
             'transaction_details' => array(
                 'order_id' => $invoice->code,

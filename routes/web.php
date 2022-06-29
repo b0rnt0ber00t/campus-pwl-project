@@ -38,6 +38,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::resource('floor.parking', ParkingController::class)->only('create', 'store', 'edit', 'update', 'destroy');
     });
     Route::prefix('parking')->name('parking-')->group(function () {
-        Route::resource('floor', ParkingFloorController::class)->only('index', 'create', 'store', 'update', 'destroy');
+        Route::resource('floor', ParkingFloorController::class)->only('index', 'create', 'store', 'edit', 'update', 'destroy');
     });
 });
