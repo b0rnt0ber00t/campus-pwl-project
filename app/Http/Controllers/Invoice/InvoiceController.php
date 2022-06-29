@@ -34,6 +34,7 @@ class InvoiceController extends Controller
         $time_count = Option::firstWhere('name', 'timer_count')->value;
         $price = Option::firstWhere('name', 'price')->value;
         $total = $invoice->{$time_count}($price);
+        $invoice->update(['finish' => microtime(true)]);
 
         $params = array(
             'transaction_details' => array(
@@ -58,6 +59,13 @@ class InvoiceController extends Controller
         $token = \Midtrans\Snap::getSnapToken($params);
 
         return view('invoice.index', compact('invoice', 'token', 'total'));
+    }
+
+    public function list()
+    {
+        $invoices = Invoice::with('parking.parking_floor')->latest()->paginate(10);
+
+        return view('invoice.list', compact('invoices'));
     }
 
     /**

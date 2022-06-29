@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Invoice
     Route::resource('invoice', InvoiceController::class)->only('index', 'update', 'destroy');
     Route::resource('parking.invoice', InvoiceController::class)->only('store');
+    Route::get('parking/invoice/list', [InvoiceController::class, 'list'])->name('invoice.list');
 
     // Option
     Route::resource('option', OptionController::class)->only('index', 'update');

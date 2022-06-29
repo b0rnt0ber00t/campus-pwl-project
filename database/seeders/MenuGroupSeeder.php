@@ -38,11 +38,11 @@ class MenuGroupSeeder extends Seeder
                     'icon' => 'fas fa-bars',
                     'permisison_name' => 'menu.management',
                 ],
-                // [
-                //     'name' => 'Invoice',
-                //     'icon' => 'fas fa-file-invoice-dollar',
-                //     'permisison_name' => 'invoice',
-                // ],
+                [
+                    'name' => 'Invoice',
+                    'icon' => 'fas fa-file-invoice-dollar',
+                    'permisison_name' => 'invoice',
+                ],
                 [
                     'name' => 'Option',
                     'icon' => 'fas fa-cog',
