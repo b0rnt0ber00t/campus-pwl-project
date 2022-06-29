@@ -26,7 +26,9 @@
             <td>{{ $invoice->code }}</td>
             <td>{{ date("Y-m-d H:i:s", $invoice->start) }}</td>
             <td>{{ date("Y-m-d H:i:s", $invoice->finish) }}</td>
-            <td>{{ 'Floor ' . $invoice->parking->parking_floor->floor . ' (Parking '. $invoice->parking->number .')' }}</td>
+            <td>
+              <span class="badge badge-{{ $invoice->parking->is_available ? 'success' : 'danger' }}">{{ 'Floor ' . $invoice->parking->parking_floor->floor . ' (Parking '. $invoice->parking->number .')' }}</span>
+            </td>
           </tr>
           @endforeach
         </tbody>
